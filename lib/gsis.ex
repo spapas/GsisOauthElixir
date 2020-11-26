@@ -8,7 +8,7 @@ defmodule Gsis do
       client_id: Application.fetch_env!(:gsis_oauth, :client_id),
       client_secret: Application.fetch_env!(:gsis_oauth, :client_secret),
       site: "https://test.gsis.gr/oauth2server/",
-      redirect_uri: "https://edlauat.hcg.gr/accounts/ggpsprovider/login/callback/",
+      redirect_uri: Application.fetch_env!(:gsis_oauth, :redirect_uri),
       authorize_url: "https://test.gsis.gr/oauth2server/oauth/authorize",
       token_url: "https://test.gsis.gr/oauth2server/oauth/token"
     )

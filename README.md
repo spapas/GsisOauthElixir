@@ -9,7 +9,10 @@ From cmd:
 ```
 mix deps.get
 iex -S mix
+copy config\secrets.exs.template config\secrets.exs
 ```
+
+Configure config\secrets.exs with your app settings.
 
 Now from iex prompt:
 
@@ -22,7 +25,6 @@ Now from iex prompt:
 
 > info = Gsis.get_info(client)
 # info will have the info of the autenticated user
-
 
 ```
 

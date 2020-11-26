@@ -5,6 +5,7 @@ config :oauth2,
 
 config :gsis_oauth,
   client_id: "",
-  client_secret: ""
+  client_secret: "",
+  redirect_uri: ""
 
 import_config "secrets.exs"
