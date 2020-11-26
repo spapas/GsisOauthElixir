@@ -49,4 +49,12 @@ defmodule Gsis do
     |> Enum.map(fn {k, v} -> {k, String.trim(v)} end)
     |> Map.new()
   end
+
+  def logout!() do
+    # This won't work; you must redirect *the user* to that particular url!
+    #logout_url = "https://test.gsis.gr/oauth2server/logout/" <> Application.fetch_env!(:gsis_oauth, :client_id)
+    #{:ok, 200, _headers, ref} = :hackney.get(logout_url)
+    #{:ok, _body} = :hackney.body(ref)
+
+  end
 end

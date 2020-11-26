@@ -1,21 +1,30 @@
 # GsisOauth
 
-**TODO: Add description**
+**A small script to authenticate with GSIS oauth through elixir**
 
-## Installation
+## Usage
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `gsis_oauth` to your list of dependencies in `mix.exs`:
+From cmd: 
 
-```elixir
-def deps do
-  [
-    {:gsis_oauth, "~> 0.1.0"}
-  ]
-end
+```
+mix deps.get
+iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/gsis_oauth](https://hexdocs.pm/gsis_oauth).
+Now from iex prompt:
+
+```
+> Gsis.authorize_url!
+# Copy over the url you get in your browser. Login as usual. It will redirect back to your app with a code parameter. Copy over this:
+
+> client = Gsis.get_token!(code: "code")
+# where code is the code you just received 
+
+> info = Gsis.get_info(client)
+# info will have the info of the autenticated user
+
+
+```
+
+
 
