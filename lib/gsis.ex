@@ -1,13 +1,14 @@
 defmodule Gsis do
   use OAuth2.Strategy
-  # Public API
+  import SweetXml
+
   def client do
     OAuth2.Client.new(
       strategy: __MODULE__,
       client_id: Application.fetch_env!(:gsis_oauth, :client_id),
       client_secret: Application.fetch_env!(:gsis_oauth, :client_secret),
       site: "https://test.gsis.gr/oauth2server/",
-      redirect_uri: "http://adeiesuat.hcg.gr/accounts/ggpsprovider/login/callback/",
+      redirect_uri: "https://edlauat.hcg.gr/accounts/ggpsprovider/login/callback/",
       authorize_url: "https://test.gsis.gr/oauth2server/oauth/authorize",
       token_url: "https://test.gsis.gr/oauth2server/oauth/token"
     )
@@ -32,5 +33,20 @@ defmodule Gsis do
     client
     |> OAuth2.Strategy.AuthCode.get_token(params, headers)
     |> put_header("accept", "application/json")
+  end
+
+  def get_info(client) do
+    OAuth2.Client.get!(client, "/userinfo?format=xml").body
+    |> xpath(~x"//userinfo",
+      userid: ~x"@userid"s,
+      taxid: ~x"@taxid"s,
+      lastname: ~x"@lastname"s,
+      firstname: ~x"@firstname"s,
+      fathername: ~x"@fathername"s,
+      mothername: ~x"@mothername"s,
+      birthyear: ~x"@birthyear"s
+    )
+    |> Enum.map(fn {k, v} -> {k, String.trim(v)} end)
+    |> Map.new()
   end
 end

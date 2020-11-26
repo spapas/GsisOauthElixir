@@ -20,6 +20,6 @@ defmodule GsisOauth.MixProject do
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
-    [{:oauth2, "~> 2.0"}, {:jason, "~> 1.2"}]
+    [{:oauth2, "~> 2.0"}, {:jason, "~> 1.2"}, {:sweet_xml, "~> 0.6.5"}]
   end
 end
